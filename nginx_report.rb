@@ -2,8 +2,8 @@ require 'open-uri'
 
 class NginxReport < Scout::Plugin
 
-  def build_report
-	url = 'http://127.0.0.1/nginx_status'
+  def build_report	
+	url = option(:url) || 'http://127.0.0.1/nginx_status'
 
 	total, requests, reading, writing, waiting = nil
 
@@ -19,11 +19,7 @@ class NginxReport < Scout::Plugin
 	  end
 	}
 	
-	add_report(:total => total)
-	add_report(:reading => reading)
-	add_report(:writing => writing)
-	add_report(:waiting => waiting)
-	add_report(:requests => requests)
+	add_report(:total => total, :reading => reading, :writing => writing, :waiting => waiting, :requests => requests)
   end
 end
 
